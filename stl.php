@@ -156,7 +156,11 @@ class Stl
     $verteces = array();
     foreach ($vertexes[0] as $key => $vert) {
         $preTriangle = new Triangle();
-        preg_match_all('/vertex\s+([-+]?\b(?:[0-9]*\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\b)\s+([-+]?\b(?:[0-9]*\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\b)\s+([-+]?\b(?:[0-9]*\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\b)\s/', $vert, $iVertexes);
+        preg_match_all(
+            '/vertex\s+'.
+            '([-+]?\b(?:[0-9]*\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\b)\s+'.
+            '([-+]?\b(?:[0-9]*\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\b)\s+'.
+            '([-+]?\b(?:[0-9]*\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\b)\s/', $vert, $iVertexes);
         foreach ($iVertexes[0] as $iKey => $vertex) {
           preg_match_all('/[-+]?[0-9]*\.?[0-9]+/', str_replace('vertex', '', $vertex), $tVector3);
           $preVector3 = new Vector3($tVector3[0][0], $tVector3[0][1], $tVector3[0][2]);
@@ -244,11 +248,7 @@ class Stl
       $minz = $minz === false ? $tminz : ($tminz < $minz ? $tminz : $minz);
       $tmaxz = max(max($triangle->vert1->z, $triangle->vert2->z), $triangle->vert3->z);
       $maxz = $maxz === false ? $tmaxz : ($tmaxz > $maxz ? $tmaxz : $maxz);
-      // echo "\n----------------------------------------";
-      // echo "\n$key::x{min:$minx, max:$maxx}\n$key::y{min:$miny, max:$maxy}\n$key::z{min:$minz, max:$maxz}";
     }
-
-    // echo "\n";
 
 
 
